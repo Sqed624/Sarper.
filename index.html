@@ -66,10 +66,13 @@
   #player {
     display: none;
   }
-  .volume-controls button, #play-music {
+  .volume-controls {
+    margin-top: 20px;
+  }
+  .volume-controls button {
     font-size: 16px;
     padding: 10px 20px;
-    margin: 10px 5px 0 5px;
+    margin: 0 10px;
     cursor: pointer;
     border-radius: 10px;
     border: none;
@@ -77,8 +80,23 @@
     color: white;
     transition: background-color 0.3s;
   }
-  .volume-controls button:hover, #play-music:hover {
+  .volume-controls button:hover {
     background-color: #575757;
+  }
+  /* Hoparlör simgesi */
+  #speaker-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 40px;
+    cursor: pointer;
+    user-select: none;
+    color: #808080;
+    transition: color 0.3s;
+    z-index: 1000;
+  }
+  #speaker-icon.active {
+    color: #4caf50; /* Yeşil renk aktifken */
   }
 </style>
 </head>
@@ -98,13 +116,14 @@
     <li><a href="https://link.brawlstars.com/invite/band/tr?tag=2L8C8GJQJ&token=ydr7a23y">Brawl Stars</a></li>
   </ul>
 
-  <button id="play-music">Müziği Aç</button>
-
   <div class="volume-controls">
     <button id="vol-down">Ses Azalt</button>
     <button id="vol-up">Ses Artır</button>
   </div>
 </div>
+
+<!-- Hoparlör simgesi -->
+<div id="speaker-icon" title="Müziği Aç">🔊</div>
 
 <div id="player"></div>
 
@@ -115,16 +134,16 @@
     player = new YT.Player('player', {
       height: '0',
       width: '0',
-      videoId: '4sNpAJBfRbk',  // Video ID
+      videoId: '4sNpAJBfRbk',
       playerVars: {
         autoplay: 1,
         loop: 1,
-        playlist: '6r82YnaF3Jc', // Playlist ID (RD önekli kısmı kaldırıldı)
+        playlist: '6r82YnaF3Jc',
         controls: 0,
         modestbranding: 1,
         rel: 0,
         showinfo: 0,
-        mute: 1   // Burada sessiz başlatıyoruz
+        mute: 1 // Sessiz başlat
       },
       events: {
         'onReady': (event) => {
@@ -134,16 +153,18 @@
     });
   }
 
-  // Youtube API script ekle
+  // Youtube API yükle
   let tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
   document.head.appendChild(tag);
 
-  // Ses açma butonu
-  document.getElementById('play-music').addEventListener('click', () => {
+  // Hoparlör simgesine tıklanınca sesi aç
+  document.getElementById('speaker-icon').addEventListener('click', () => {
     if(player) {
       player.unMute();
       player.playVideo();
+      // Rengi değiştir aktiflik göstermek için
+      document.getElementById('speaker-icon').classList.add('active');
     }
   });
 
