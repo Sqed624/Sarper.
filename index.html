@@ -176,13 +176,12 @@
 
 <script>
   let player;
-  let isMuted = true;
 
   function extractVideoId(urlOrId) {
-    // Eğer direkt video ID ise döndür
+    // Direkt video ID ise döndür
     if (/^[a-zA-Z0-9_-]{11}$/.test(urlOrId)) return urlOrId;
 
-    // YouTube linkten video id çekme regex
+    // YouTube URL'den video ID çıkartma regex'i
     const regExp = /^.*(?:youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]{11}).*/;
     const match = urlOrId.match(regExp);
     return (match && match[1]) ? match[1] : null;
@@ -192,7 +191,7 @@
     player = new YT.Player('player', {
       height: '0',
       width: '0',
-      videoId: '4sNpAJBfRbk',  // Başlangıç müziği
+      videoId: '4sNpAJBfRbk',
       playerVars: {
         autoplay: 1,
         loop: 1,
@@ -211,7 +210,7 @@
     });
   }
 
-  // Youtube API scriptini ekle
+  // YouTube API scripti ekle
   let tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
   document.head.appendChild(tag);
@@ -221,36 +220,31 @@
   const musicPanel = document.getElementById('music-panel');
 
   speakerIcon.addEventListener('click', () => {
-    if(musicPanel.style.display === 'block'){
+    if (musicPanel.style.display === 'block') {
       musicPanel.style.display = 'none';
     } else {
       musicPanel.style.display = 'block';
     }
   });
 
-  // Video çalma butonu
+  // Çal butonuna basınca
   document.getElementById('play-video-btn').addEventListener('click', () => {
     const inputVal = document.getElementById('video-id-input').value.trim();
     const videoId = extractVideoId(inputVal);
-    if(videoId && player) {
+    if (videoId && player) {
       player.loadVideoById(videoId);
       player.unMute();
       speakerIcon.classList.add('active');
       musicPanel.style.display = 'none';
     } else {
-      alert("Geçerli bir YouTube video ID'si veya linki girin.");
+      alert("Lütfen geçerli bir YouTube video ID'si veya linki girin.");
     }
   });
 
-  // İlahi çalma butonu (senin verdiğin linkteki video ID'si)
+  // İlahi çalma butonu
   document.getElementById('play-ilahi-btn').addEventListener('click', () => {
-    if(player) {
-      // İlahi video ID'si: 2cMhAm-GgX4
-      player.loadVideoById({
-        videoId: '2cMhAm-GgX4',
-        startSeconds: 0,
-        suggestedQuality: 'default'
-      });
+    if (player) {
+      player.loadVideoById('2cMhAm-GgX4');
       player.unMute();
       speakerIcon.classList.add('active');
       musicPanel.style.display = 'none';
@@ -259,7 +253,7 @@
 
   // Ses artırma
   document.getElementById('vol-up').addEventListener('click', () => {
-    if(player) {
+    if (player) {
       let vol = player.getVolume();
       player.setVolume(Math.min(vol + 10, 100));
     }
@@ -267,7 +261,7 @@
 
   // Ses azaltma
   document.getElementById('vol-down').addEventListener('click', () => {
-    if(player) {
+    if (player) {
       let vol = player.getVolume();
       player.setVolume(Math.max(vol - 10, 0));
     }
