@@ -5,62 +5,109 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sarper Bey Was Here</title>
 <style>
-  /* --- Genel Stil --- */
+  /* Genel stil */
   body {
+    margin: 0;
     font-family: Arial, sans-serif;
     background-image: url('images/ağaç.jpg');
     background-size: cover;
     background-position: center;
-    margin: 0;
-    padding: 0;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
     min-height: 100vh;
-    transition: background-color 0.4s, color 0.4s;
     color: #333;
   }
+
+  /* Yan menü */
+  nav.sidebar {
+    width: 200px;
+    background: rgba(50, 50, 50, 0.9);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    position: fixed;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+  nav.sidebar h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: normal;
+    font-size: 22px;
+  }
+  nav.sidebar button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    padding: 15px 20px;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s ease;
+  }
+  nav.sidebar button:hover, nav.sidebar button.active {
+    background-color: #666;
+  }
+
+  /* Ana içerik alanı, menü yanına */
+  main.content {
+    margin-left: 200px;
+    padding: 40px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+
+  /* Ortadaki kutu */
   .container {
     background-color: rgba(192, 192, 192, 0.9);
-    padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    padding: 40px;
+    max-width: 450px;
+    width: 100%;
     text-align: center;
-    max-width: 400px;
-    margin: 30px 15px;
   }
+
+  /* Profil resmi */
   .profile-image {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 20px;
+    transition: all 0.3s ease;
   }
+
+  /* Başlık ve açıklama */
   h1 {
-    margin-bottom: 10px;
+    margin: 0 0 10px;
   }
   .description {
-    margin-bottom: 20px;
     color: #555;
+    margin-bottom: 20px;
   }
+
+  /* Link butonları */
   ul.links {
     list-style: none;
     padding: 0;
-    margin: 0 0 25px 0;
-    text-align: center;
+    margin: 0 0 30px 0;
   }
   ul.links li {
     margin-bottom: 15px;
   }
   ul.links a {
+    display: inline-block;
+    background-color: #808080;
+    color: white;
     text-decoration: none;
-    color: #fff;
     font-weight: bold;
     padding: 15px 20px;
     border-radius: 30px;
-    background-color: #808080;
-    display: inline-block;
     transition: transform 0.3s ease, background-color 0.3s ease;
   }
   ul.links a:hover {
@@ -68,307 +115,339 @@
     transform: scale(1.15);
   }
 
-  /* Ses kontrolleri */
-  .volume-controls {
-    margin-top: 15px;
-  }
-  .volume-controls button {
-    font-size: 16px;
-    padding: 10px 20px;
-    margin: 0 10px 10px 10px;
-    cursor: pointer;
-    border-radius: 10px;
-    border: none;
-    background-color: #808080;
-    color: white;
-    transition: background-color 0.3s;
-  }
-  .volume-controls button:hover {
-    background-color: #575757;
-  }
-
-  /* Hoparlör ikonu */
+  /* Müzik panel ve ikon */
   #speaker-icon {
     position: fixed;
     top: 20px;
     right: 20px;
-    font-size: 40px;
+    width: 45px;
+    height: 45px;
     cursor: pointer;
-    user-select: none;
-    color: #808080;
-    transition: color 0.3s;
-    z-index: 1000;
+    background: url('https://cdn-icons-png.flaticon.com/512/727/727240.png') no-repeat center center;
+    background-size: contain;
+    transition: filter 0.3s ease;
   }
   #speaker-icon.active {
-    color: #4caf50;
+    filter: brightness(0.8);
   }
-
-  /* Panel animasyonlu */
   #music-panel {
     position: fixed;
-    top: 70px;
+    top: 75px;
     right: 20px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
     width: 280px;
-    max-width: 90vw;
+    background: rgba(255,255,255,0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    padding: 15px;
     display: none;
-    z-index: 1001;
-    transition: opacity 0.4s ease;
-  }
-  #music-panel.show {
-    display: block;
-    opacity: 1;
+    z-index: 1000;
+    box-sizing: border-box;
   }
   #music-panel input[type="text"] {
-    width: calc(100% - 24px);
-    padding: 8px 10px;
-    font-size: 16px;
-    margin-bottom: 10px;
-    border-radius: 6px;
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    margin-bottom: 8px;
+    border-radius: 5px;
     border: 1px solid #ccc;
+    box-sizing: border-box;
   }
   #music-panel button {
-    width: 48%;
-    font-size: 16px;
-    padding: 10px 0;
-    margin: 0 2% 0 0;
-    cursor: pointer;
-    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+    font-size: 15px;
+    margin-bottom: 8px;
     border: none;
-    background-color: #808080;
+    border-radius: 5px;
+    background-color: #555;
     color: white;
-    transition: background-color 0.3s;
-  }
-  #music-panel button:last-child {
-    margin-right: 0;
-    margin-left: 2%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   #music-panel button:hover {
-    background-color: #575757;
+    background-color: #333;
   }
 
-  /* Çalan şarkı başlığı */
-  #current-song {
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 16px;
+  /* Ses kontrolü küçük alt bar */
+  #mini-volume-control {
+    display: none; /* Anasayfa açıldığında görünür olacak */
+    position: fixed;
+    bottom: 10px;
+    left: 200px; /* Menü yanına hizala */
+    width: calc(100% - 200px);
+    background: rgba(128, 128, 128, 0.7);
+    padding: 6px 12px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 1000;
+  }
+  #mini-volume-control button {
+    font-size: 14px;
+    margin: 0 5px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: none;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #mini-volume-control button:hover {
+    background-color: #222;
   }
 
   /* İletişim formu */
-  #contact-form {
-    background: rgba(240, 240, 240, 0.9);
-    margin-top: 30px;
-    padding: 20px;
-    border-radius: 10px;
+  form#contact-form {
     text-align: left;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
   }
-  #contact-form h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-  #contact-form label {
+  form#contact-form label {
     display: block;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     font-weight: bold;
   }
-  #contact-form input, #contact-form textarea {
+  form#contact-form input, form#contact-form textarea {
     width: 100%;
-    padding: 8px 10px;
+    padding: 8px;
     margin-bottom: 15px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #aaa;
     font-size: 14px;
+    resize: vertical;
   }
-  #contact-form button {
+  form#contact-form button {
     width: 100%;
-    padding: 12px 0;
-    background-color: #4caf50;
-    border: none;
-    border-radius: 10px;
-    color: white;
+    padding: 10px;
     font-size: 16px;
+    border: none;
+    background-color: #555;
+    color: white;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
   }
-  #contact-form button:hover {
-    background-color: #388e3c;
-  }
-
-  /* Dark Mode */
-  body.dark {
-    background-color: #121212;
-    color: #eee;
-  }
-  body.dark .container {
-    background-color: rgba(40, 40, 40, 0.9);
-    color: #eee;
-  }
-  body.dark ul.links a {
-    background-color: #555;
-    color: #ddd;
-  }
-  body.dark ul.links a:hover {
-    background-color: #888;
-  }
-  body.dark .volume-controls button,
-  body.dark #music-panel button {
-    background-color: #555;
-    color: #eee;
-  }
-  body.dark .volume-controls button:hover,
-  body.dark #music-panel button:hover {
-    background-color: #888;
-  }
-  body.dark #music-panel {
-    background: rgba(30,30,30,0.95);
-    color: #eee;
-  }
-  body.dark #contact-form {
-    background: rgba(50,50,50,0.9);
-  }
-  body.dark #speaker-icon {
-    color: #ccc;
-  }
-  body.dark #speaker-icon.active {
-    color: #8bc34a;
+  form#contact-form button:hover {
+    background-color: #333;
   }
 
-  /* Responsive */
-  @media (max-width: 500px) {
-    .container {
-      padding: 25px 20px;
-      margin: 15px;
-      max-width: 90vw;
+  /* Gizleme / gösterme */
+  .hidden {
+    display: none !important;
+  }
+
+  /* Buton küçültme ve resim küçültme anasayfa için */
+  .small-buttons ul.links a {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  .small-buttons .profile-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  /* Responsive mobil için menüyü üstte yapar */
+  @media (max-width: 600px) {
+    nav.sidebar {
+      position: fixed;
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: row;
+      padding: 10px 0;
+      top: 0;
+      left: 0;
+      justify-content: center;
+      z-index: 1001;
     }
-    .volume-controls button {
-      padding: 10px 14px;
+    nav.sidebar button {
+      flex: 1;
       font-size: 14px;
-      margin: 5px 5px;
+      padding: 10px 5px;
+      text-align: center;
     }
-    #music-panel {
-      width: 90vw;
-      right: 5vw;
-      top: 60px;
+    main.content {
+      margin-left: 0;
+      margin-top: 60px;
+      padding: 20px;
     }
-    #speaker-icon {
-      font-size: 36px;
-      top: 15px;
-      right: 15px;
+    #mini-volume-control {
+      left: 0;
+      width: 100%;
+      bottom: 50px;
     }
   }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <img class="profile-image" src="images/Mustafa Kemal Paşa.jpeg" alt="Profil Resminiz" />
-  <h1>Sarper Bey</h1>
-  <p class="description">
-    Merhaba Ben Sarper 14 Yaşında ortaokul öğrencisiyim. <br />Basit bir şekilde yazılım ile ilgileniyorum.
-  </p>
-  <ul class="links">
-    <li><a href="https://www.instagram.com/k.sarper" target="_blank" rel="noopener">Instagram</a></li>
-    <li><a href="https://discord.gg/uuhV25J7" target="_blank" rel="noopener">Nebula Reklam</a></li>
-    <li><a href="https://discord.gg/uuhV25J7" target="_blank" rel="noopener">Hangar</a></li>
-    <li><a href="https://link.clashofclans.com/tr?action=OpenClanProfile&tag=2RU29VLJG" target="_blank" rel="noopener">Clash Of Clans</a></li>
-    <li><a href="https://link.brawlstars.com/invite/band/tr?tag=2L8C8GJQJ&token=ydr7a23y" target="_blank" rel="noopener">Brawl Stars</a></li>
-  </ul>
+<nav class="sidebar">
+  <h2>Sarper Bey</h2>
+  <button id="btn-home" class="active" aria-label="Anasayfa">Anasayfa</button>
+  <button id="btn-contact" aria-label="İletişim">İletişim</button>
+</nav>
 
-  <div class="volume-controls">
-    <button id="vol-down">Ses Azalt</button>
-    <button id="vol-up">Ses Artır</button>
+<main class="content">
+  <!-- Anasayfa içeriği -->
+  <section id="home-section" class="container">
+    <img class="profile-image" src="images/Mustafa Kemal Paşa.jpeg" alt="Profil Resminiz" />
+    <h1>Sarper Bey</h1>
+    <p class="description">Merhaba Ben Sarper 14 Yaşında ortaokul öğrencisiyim.<br />Basit bir şekilde yazılım ile ilgileniyorum.</p>
+
+    <ul class="links">
+      <li><a href="https://www.instagram.com/k.sarper" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://discord.gg/uuhV25J7" target="_blank" rel="noopener">Nebula Reklam</a></li>
+      <li><a href="https://discord.gg/uuhV25J7" target="_blank" rel="noopener">Hangar</a></li>
+      <li><a href="https://link.clashofclans.com/tr?action=OpenClanProfile&tag=2RU29VLJG" target="_blank" rel="noopener">Clash Of Clans</a></li>
+      <li><a href="https://link.brawlstars.com/invite/band/tr?tag=2L8C8GJQJ&token=ydr7a23y" target="_blank" rel="noopener">Brawl Stars</a></li>
+    </ul>
+  </section>
+
+  <!-- İletişim içeriği -->
+  <section id="contact-section" class="container hidden">
+    <h1>İletişim</h1>
+    <form id="contact-form" aria-label="İletişim Formu">
+      <label for="name">Adınız:</label>
+      <input type="text" id="name" name="name" required placeholder="Adınızı girin" />
+      <label for="email">E-posta:</label>
+      <input type="email" id="email" name="email" required placeholder="E-posta adresinizi girin" />
+      <label for="message">Mesajınız:</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Mesajınızı yazın"></textarea>
+      <button type="submit">Gönder</button>
+    </form>
+  </section>
+</main>
+
+<!-- Hoparlör ikonu ve müzik paneli -->
+<div id="speaker-icon" title="Müzik Kontrolü" aria-label="Müzik Kontrolü"></div>
+
+<div id="music-panel" aria-hidden="true">
+  <input type="text" id="video-id-input" placeholder="YouTube video linki veya ID girin" aria-label="YouTube video linki veya ID" />
+  <button id="play-video-btn" aria-label="Videoyu Çal">Çal</button>
+  <button id="play-ilahi-btn" aria-label="İlahi Çal">İlahi Çal</button>
+  <div style="margin-top:10px;">
+    <button id="vol-down" aria-label="Sesi Kıs">Ses -</button>
+    <button id="vol-up" aria-label="Sesi Aç">Ses +</button>
   </div>
-
-  <div id="current-song">Çalan Şarkı: -</div>
-
-  <form id="contact-form">
-    <h2>İletişim</h2>
-    <label for="name">İsim:</label>
-    <input type="text" id="name" name="name" required placeholder="Adınız" />
-    <label for="email">E-posta:</label>
-    <input type="email" id="email" name="email" required placeholder="E-posta adresiniz" />
-    <label for="message">Mesaj:</label>
-    <textarea id="message" name="message" rows="4" required placeholder="Mesajınız"></textarea>
-    <button type="submit">Gönder</button>
-  </form>
 </div>
 
-<!-- Hoparlör simgesi -->
-<div id="speaker-icon" title="Müziği Aç/Kapat">🔊</div>
-
-<!-- Müzik paneli -->
-<div id="music-panel">
-  <input type="text" id="video-id-input" placeholder="YouTube video ID veya linki girin" />
-  <button id="play-video-btn">Çal</button>
-  <button id="play-ilahi-btn">İlahi Çal</button>
-  <button id="toggle-dark-mode" style="width: 100%; margin-top: 10px; background-color: #333;">Karanlık Modu Aç/Kapat</button>
+<!-- Mini ses kontrolü anasayfa alt bar -->
+<div id="mini-volume-control" aria-label="Mini Ses Kontrolü" role="region" aria-live="polite" aria-atomic="true">
+  <button id="mini-vol-down" aria-label="Sesi Kıs">Ses -</button>
+  <button id="mini-vol-up" aria-label="Sesi Aç">Ses +</button>
 </div>
 
-<div id="player"></div>
+<!-- YouTube iframe API -->
+<script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
   let player;
-  let playlist = [
-    {id: '4sNpAJBfRbk', title: 'Başlangıç Şarkısı'},
-    {id: '2cMhAm-GgX4', title: 'İlahi'},
-    {id: '6r82YnaF3Jc', title: 'Playlist Parçası'}
+  const playlist = [
+    {id: '4sNpAJBfRbk', title: 'Varsa Yanarım - Sarper'}, // İlk açılışta çalacak şarkı (senin istediğin)
+    {id: '2cMhAm-GgX4', title: 'İlahi'}
   ];
 
-  // Video ID çıkartıcı (link veya ID farketmez)
-  function extractVideoId(urlOrId) {
-    if (/^[a-zA-Z0-9_-]{11}$/.test(urlOrId)) return urlOrId;
-    const regExp = /^.*(?:youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]{11}).*/;
-    const match = urlOrId.match(regExp);
-    return (match && match[1]) ? match[1] : null;
-  }
-
-  // Başlığı ayarla
-  function setCurrentSongTitle(title) {
-    const el = document.getElementById('current-song');
-    el.textContent = "Çalan Şarkı: " + (title || '-');
-  }
-
-  // YouTube API yüklendiğinde player oluştur
+  // YouTube player'ı başlat
   function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
+    player = new YT.Player('yt-player', {
       height: '0',
       width: '0',
-      videoId: playlist[0].id,
       playerVars: {
         autoplay: 1,
-        loop: 1,
-        playlist: playlist[0].id,
         controls: 0,
         modestbranding: 1,
-        rel: 0,
-        showinfo: 0,
-        mute: 1
+        loop: 1,
+        playlist: playlist[0].id
       },
+      videoId: playlist[0].id,
       events: {
-        'onReady': (event) => {
-          event.target.playVideo();
+        'onReady': event => {
           event.target.setVolume(50);
-          setCurrentSongTitle(playlist[0].title);
-        },
-        'onStateChange': onPlayerStateChange
+          event.target.playVideo();
+        }
       }
     });
   }
 
-  // Player durum değişikliği, çalan video başlığını güncelle
-  function onPlayerStateChange(event) {
-    if(event.data === YT.PlayerState.PLAYING) {
-      const videoData = player.getVideoData();
-      setCurrentSongTitle(videoData.title);
-    }
+  // Sayfa geçişleri
+  const btnHome = document.getElementById('btn-home');
+  const btnContact = document.getElementById('btn-contact');
+  const homeSection = document.getElementById('home-section');
+  const contactSection = document.getElementById('contact-section');
+  const container = document.querySelector('.container');
+  const profileImage = document.querySelector('.profile-image');
+  const linksList = document.querySelector('ul.links');
+  const speakerIcon = document.getElementById('speaker-icon');
+  const musicPanel = document.getElementById('music-panel');
+  const miniVolumeControl = document.getElementById('mini-volume-control');
+
+  // İlgili kısımların görünümünü ayarlayan fonksiyon
+  function showHome() {
+    btnHome.classList.add('active');
+    btnContact.classList.remove('active');
+    homeSection.classList.remove('hidden');
+    contactSection.classList.add('hidden');
+
+    // Anasayfa görünümü: profil resmi ve linkler görünür
+    profileImage.style.display = 'block';
+    linksList.style.display = 'block';
+    container.classList.remove('small-buttons');
+    // Mini ses kontrol görünür, ana panel kapalı
+    miniVolumeControl.style.display = 'block';
+    musicPanel.style.display = 'none';
+    speakerIcon.style.display = 'block';
   }
 
-  // Ses butonları
+  function showContact() {
+    btnContact.classList.add('active');
+    btnHome.classList.remove('active');
+    contactSection.classList.remove('hidden');
+    homeSection.classList.add('hidden');
+
+    // İletişim görünümü: profil resmi ve linkler gizli
+    profileImage.style.display = 'none';
+    linksList.style.display = 'none';
+    container.classList.add('small-buttons');
+    // Mini ses kontrol gizli, ana panel açık
+    miniVolumeControl.style.display = 'none';
+    musicPanel.style.display = 'block';
+    speakerIcon.style.display = 'block';
+  }
+
+  btnHome.addEventListener('click', () => {
+    showHome();
+  });
+
+  btnContact.addEventListener('click', () => {
+    showContact();
+  });
+
+  // Hoparlör ikonu aç/kapa panel
+  speakerIcon.addEventListener('click', () => {
+    if (musicPanel.style.display === 'block') {
+      musicPanel.style.display = 'none';
+      speakerIcon.classList.remove('active');
+    } else {
+      musicPanel.style.display = 'block';
+      speakerIcon.classList.add('active');
+    }
+  });
+
+  // Ses kontrol mini
+  document.getElementById('mini-vol-up').addEventListener('click', () => {
+    if(player) {
+      let vol = player.getVolume();
+      player.setVolume(Math.min(vol + 10, 100));
+    }
+  });
+  document.getElementById('mini-vol-down').addEventListener('click', () => {
+    if(player) {
+      let vol = player.getVolume();
+      player.setVolume(Math.max(vol - 10, 0));
+    }
+  });
+
+  // Ses kontrol panel
   document.getElementById('vol-up').addEventListener('click', () => {
     if(player) {
       let vol = player.getVolume();
@@ -382,20 +461,7 @@
     }
   });
 
-  // Hoparlör ikonu ve panel aç/kapa
-  const speakerIcon = document.getElementById('speaker-icon');
-  const musicPanel = document.getElementById('music-panel');
-  speakerIcon.addEventListener('click', () => {
-    if(musicPanel.style.display === 'block') {
-      musicPanel.style.display = 'none';
-      speakerIcon.classList.remove('active');
-    } else {
-      musicPanel.style.display = 'block';
-      speakerIcon.classList.add('active');
-    }
-  });
-
-  // Video ID girip çalma butonu
+  // Video linki çalma
   document.getElementById('play-video-btn').addEventListener('click', () => {
     if(!player) return;
     const inputVal = document.getElementById('video-id-input').value.trim();
@@ -413,39 +479,40 @@
   // İlahi çalma butonu
   document.getElementById('play-ilahi-btn').addEventListener('click', () => {
     if(!player) return;
-    player.loadVideoById('2cMhAm-GgX4');
+    player.loadVideoById(playlist[1].id);
     player.unMute();
     speakerIcon.classList.add('active');
     musicPanel.style.display = 'none';
   });
 
-  // Dark mode toggle
-  document.getElementById('toggle-dark-mode').addEventListener('click', () => {
-    document.body.classList.toggle('dark');
-  });
-
-  // Sayfa görünürlük değişimi (sekme geçişi)
-  document.addEventListener('visibilitychange', () => {
-    if(!player) return;
-    if(document.hidden) {
-      player.pauseVideo();
-    } else {
-      player.playVideo();
+  // Video ID ayıklama fonksiyonu (link veya direkt ID)
+  function extractVideoId(input) {
+    if(!input) return null;
+    // Eğer direkt ID ise uzunluğu 11 karakter olmalı
+    if(input.length === 11 && !input.includes('http')) return input;
+    // URL'den ID çıkarma
+    const urlPatterns = [
+      /v=([a-zA-Z0-9_-]{11})/,           // ?v=VIDEOID
+      /youtu\.be\/([a-zA-Z0-9_-]{11})/,  // youtu.be/VIDEOID
+      /embed\/([a-zA-Z0-9_-]{11})/       // embed/VIDEOID
+    ];
+    for(const pattern of urlPatterns) {
+      const match = input.match(pattern);
+      if(match && match[1]) return match[1];
     }
-  });
+    return null;
+  }
 
-  // İletişim formu (sadece ön yüzde uyarı)
-  document.getElementById('contact-form').addEventListener('submit', e => {
-    e.preventDefault();
-    alert('Mesajınız gönderildi! (Bu demo form sadece uyarı verir.)');
-    e.target.reset();
-  });
+  // Sayfa açıldığında anasayfa göster
+  showHome();
 
-  // YouTube Iframe API yükle
-  let tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/iframe_api";
-  document.head.appendChild(tag);
+  // Sayfa gizliliği değişiminde müzik devam etmeli, durdurma kaldırıldı
+  document.removeEventListener('visibilitychange', () => {}); // tamamen kaldırdık
+
 </script>
+
+<!-- Gizli iframe YouTube player -->
+<div id="yt-player" style="display:none;"></div>
 
 </body>
 </html>
