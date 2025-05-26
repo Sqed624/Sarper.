@@ -1,37 +1,96 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>İlahi Sitesi</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarper Bey Was Here</title>
+  <link rel="icon" href="images/favicon.ico" type="image/ico">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/jpg">
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background-image: url('images/ağaç.jpg');
+      background-size: cover;
+      background-position: center;
       margin: 0;
-      font-family: sans-serif;
-      background-color: #fff;
-      color: #000;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
       transition: background-color 0.3s, color 0.3s;
     }
     body.dark-mode {
       background-color: #121212;
+      background-image: none;
       color: #e0e0e0;
     }
-    .logo {
-      display: block;
-      margin: 20px auto;
-      width: 120px;
+    .container {
+      background-color: rgba(192, 192, 192, 0.9);
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 600px;
+      margin: auto;
     }
-    nav.sidebar {
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 { color: #333; }
+    .description { margin-bottom: 20px; color: #555; }
+    .links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .links li { margin-bottom: 15px; }
+    .links a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      padding: 15px 20px;
+      border-radius: 30px;
+      background-color: #808080;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    .links a:hover {
+      background-color: #575757;
+      transform: scale(1.15);
+    }
+    .sidebar {
       position: fixed;
       top: 0;
       left: 0;
       width: 200px;
       height: 100%;
-      background-color: #f0f0f0;
+      background-color: rgba(255, 255, 255, 0.8);
       padding: 20px;
+      backdrop-filter: blur(10px);
     }
-    body.dark-mode nav.sidebar {
+    body.dark-mode .sidebar {
       background-color: #1e1e1e;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar li {
+      margin: 15px 0;
+    }
+    .sidebar a {
+      text-decoration: none;
+      color: #000;
+    }
+    body.dark-mode .sidebar a {
+      color: #fff;
     }
     main {
       margin-left: 220px;
@@ -86,26 +145,40 @@
     </ul>
   </nav>
   <main>
-    <img src="logo.png" alt="Logo" class="logo" />
     <section id="anasayfa">
-      <h1>Hoş Geldiniz</h1>
-      <p>İlahi sitesine hoş geldiniz.</p>
+      <div class="container">
+        <img class="profile-image" src="images/Mustafa Kemal Paşa.jpeg" alt="Profil Resminiz">
+        <h1>Sarper Bey</h1>
+        <p class="description">Merhaba Ben Sarper 14 Yaşında ortaokul öğrencisiyim. <br>Basit bir şekilde yazılım ile ilgileniyorum.</p>
+        <ul class="links">
+          <li><a href="https://www.instagram.com/k.sarper">Instagram</a></li>
+          <li><a href="https://discord.gg/uuhV25J7">Nebula Reklam</a></li>
+          <li><a href="https://discord.gg/uuhV25J7">Hangar</a></li>
+          <li><a href="https://link.clashofclans.com/tr?action=OpenClanProfile&tag=2RU29VLJG">Clash Of Clans</a></li>
+          <li><a href="https://link.brawlstars.com/invite/band/tr?tag=2L8C8GJQJ&token=ydr7a23y">Brawl Stars</a></li>
+        </ul>
+      </div>
     </section>
+
     <section id="iletisim">
-      <h1>Benimle İletişime Geç</h1>
-      <p>E-posta: <a href="mailto:ornek@mail.com">ornek@mail.com</a></p>
-      <form action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-        <input type="text" name="name" placeholder="Adınız" required />
-        <input type="email" name="email" placeholder="E-posta adresiniz" required />
-        <textarea name="message" placeholder="Mesajınız" required></textarea>
-        <button type="submit">Gönder</button>
-      </form>
+      <div class="container">
+        <h1>Benimle İletişime Geç</h1>
+        <p>E-posta: <a href="mailto:ornek@mail.com">ornek@mail.com</a></p>
+        <form action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+          <input type="text" name="name" placeholder="Adınız" required />
+          <input type="email" name="email" placeholder="E-posta adresiniz" required />
+          <textarea name="message" placeholder="Mesajınız" required></textarea>
+          <button type="submit">Gönder</button>
+        </form>
+      </div>
     </section>
+
     <div class="dark-toggle">
-      <button id="darkModeBtn">🌙 Karanlık Moda Geç</button>
+      <button id="darkModeBtn">✨ Karanlık Moda Geç</button>
     </div>
   </main>
+
   <script>
     document.getElementById('darkModeBtn').addEventListener('click', () => {
       document.body.classList.toggle('dark-mode');
