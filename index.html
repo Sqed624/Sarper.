@@ -5,164 +5,164 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Sarper Bey Was Here</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-image: url('images/ağaç.jpg');
-        background-size: cover;
-        background-position: center;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        flex-direction: column;
-    }
-    .container {
-        background-color: rgba(192, 192, 192, 0.9);
-        padding: 40px;
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        z-index: 10;
-        position: relative;
-        max-width: 400px;
-    }
-    .profile-image {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 20px;
-    }
-    h1 {
-        color: #333;
-    }
-    .description {
-        margin-bottom: 20px;
-        color: #555;
-    }
-    .links {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        text-align: center;
-    }
-    .links li {
-        margin-bottom: 15px;
-    }
-    .links a {
-        text-decoration: none;
-        color: #fff;
-        font-weight: bold;
-        padding: 15px 20px;
-        border-radius: 30px;
-        background-color: #808080;
-        display: inline-block;
-        transition: transform 0.3s ease;
-    }
-    .links a:hover {
-        background-color: #575757;
-        transform: scale(1.15);
-    }
-    #player {
-        display: none; /* iframe görünmesin */
-    }
-    .volume-controls {
-        margin-top: 20px;
-    }
-    .volume-controls button {
-        font-size: 16px;
-        padding: 10px 20px;
-        margin: 0 10px;
-        cursor: pointer;
-        border-radius: 10px;
-        border: none;
-        background-color: #808080;
-        color: white;
-        transition: background-color 0.3s;
-    }
-    .volume-controls button:hover {
-        background-color: #575757;
-    }
+  body {
+    font-family: Arial, sans-serif;
+    background-image: url('images/ağaç.jpg');
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  .container {
+    background-color: rgba(192, 192, 192, 0.9);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+  }
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  h1 {
+    color: #333;
+  }
+  .description {
+    margin-bottom: 20px;
+    color: #555;
+  }
+  .links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+  .links li {
+    margin-bottom: 15px;
+  }
+  .links a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 15px 20px;
+    border-radius: 30px;
+    background-color: #808080;
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  .links a:hover {
+    background-color: #575757;
+    transform: scale(1.15);
+  }
+  #player {
+    display: none;
+  }
+  .volume-controls button, #play-music {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 10px 5px 0 5px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background-color: #808080;
+    color: white;
+    transition: background-color 0.3s;
+  }
+  .volume-controls button:hover, #play-music:hover {
+    background-color: #575757;
+  }
 </style>
-<link rel="icon" href="images/favicon.ico" type="image/ico" />
-<link rel="shortcut icon" href="images/favicon.ico" type="image/jpg" />
 </head>
 <body>
 
 <div class="container">
-    <img class="profile-image" src="images/Mustafa Kemal Paşa.jpeg" alt="Profil Resminiz" />
-    <h1>Sarper Bey</h1>
-    <p class="description">
-        Merhaba Ben Sarper 14 Yaşında ortaokul öğrencisiyim. <br />Basit bir şekilde yazılım ile ilgileniyorum.
-    </p>
-    <ul class="links">
-        <li><a href="https://www.instagram.com/k.sarper">Instagram</a></li>
-        <li><a href="https://discord.gg/uuhV25J7">Nebula Reklam</a></li>
-        <li><a href="https://discord.gg/uuhV25J7">Hangar</a></li>
-        <li><a href="https://link.clashofclans.com/tr?action=OpenClanProfile&tag=2RU29VLJG">Clash Of Clans</a></li>
-        <li><a href="https://link.brawlstars.com/invite/band/tr?tag=2L8C8GJQJ&token=ydr7a23y">Brawl Stars</a></li>
-    </ul>
+  <img class="profile-image" src="images/Mustafa Kemal Paşa.jpeg" alt="Profil Resminiz" />
+  <h1>Sarper Bey</h1>
+  <p class="description">
+    Merhaba Ben Sarper 14 Yaşında ortaokul öğrencisiyim. <br />Basit bir şekilde yazılım ile ilgileniyorum.
+  </p>
+  <ul class="links">
+    <li><a href="https://www.instagram.com/k.sarper">Instagram</a></li>
+    <li><a href="https://discord.gg/uuhV25J7">Nebula Reklam</a></li>
+    <li><a href="https://discord.gg/uuhV25J7">Hangar</a></li>
+    <li><a href="https://link.clashofclans.com/tr?action=OpenClanProfile&tag=2RU29VLJG">Clash Of Clans</a></li>
+    <li><a href="https://link.brawlstars.com/invite/band/tr?tag=2L8C8GJQJ&token=ydr7a23y">Brawl Stars</a></li>
+  </ul>
 
-    <div class="volume-controls">
-        <button id="vol-down">Ses Azalt</button>
-        <button id="vol-up">Ses Artır</button>
-    </div>
+  <button id="play-music">Müziği Aç</button>
+
+  <div class="volume-controls">
+    <button id="vol-down">Ses Azalt</button>
+    <button id="vol-up">Ses Artır</button>
+  </div>
 </div>
 
-<!-- Youtube Player -->
 <div id="player"></div>
 
 <script>
   let player;
+
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
       height: '0',
       width: '0',
-      videoId: '4sNpAJBfRbk',  // İstediğin video ID
+      videoId: '4sNpAJBfRbk',  // Video ID
       playerVars: {
         autoplay: 1,
         loop: 1,
-        playlist: '6r82YnaF3Jc', // playlist ID (RD ön eki kaldırıldı)
+        playlist: '6r82YnaF3Jc', // Playlist ID (RD önekli kısmı kaldırıldı)
         controls: 0,
         modestbranding: 1,
         rel: 0,
         showinfo: 0,
-        mute: 0
+        mute: 1   // Burada sessiz başlatıyoruz
       },
       events: {
-        'onReady': onPlayerReady
+        'onReady': (event) => {
+          event.target.playVideo();
+        }
       }
     });
   }
 
-  function onPlayerReady(event) {
-    event.target.playVideo();
-  }
-
-  // Youtube IFrame API yükle
+  // Youtube API script ekle
   let tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
-  let firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  document.head.appendChild(tag);
 
-  // Ses kontrolü
-  document.getElementById('vol-up').addEventListener('click', () => {
-    let currentVol = player.getVolume();
-    if (currentVol < 100) {
-      player.setVolume(Math.min(currentVol + 10, 100));
+  // Ses açma butonu
+  document.getElementById('play-music').addEventListener('click', () => {
+    if(player) {
+      player.unMute();
+      player.playVideo();
     }
   });
 
+  // Ses artırma
+  document.getElementById('vol-up').addEventListener('click', () => {
+    if(player) {
+      let vol = player.getVolume();
+      player.setVolume(Math.min(vol + 10, 100));
+    }
+  });
+
+  // Ses azaltma
   document.getElementById('vol-down').addEventListener('click', () => {
-    let currentVol = player.getVolume();
-    if (currentVol > 0) {
-      player.setVolume(Math.max(currentVol - 10, 0));
+    if(player) {
+      let vol = player.getVolume();
+      player.setVolume(Math.max(vol - 10, 0));
     }
   });
 </script>
 
 </body>
 </html>
-
